@@ -1,0 +1,22 @@
+{
+  "name": "img.dn.ht",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "start-dev": "nodemon server.ts",
+    "start": "ts-node server.ts"
+  },
+  "dependencies": {
+    "@types/express": "^4.17.8",
+    "@types/sharp": "^0.25.1",
+    "express": "^4.17.1",
+    "request": "^2.88.2",
+    "sharp": "^0.26.0",
+    "ts-node": "^9.0.0",
+    "typescript": "^4.0.2"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.4"
+  }
+}
