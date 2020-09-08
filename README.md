@@ -13,7 +13,7 @@ Example:
     - AWS certificate manager for https
     - Cache policy to pass through headers
         - Accept (for webp content negotiation)
-        - DPR, Width (for client hints)
+        - DPR, Width (for [client hints](https://developers.google.com/web/fundamentals/performance/optimizing-content-efficiency/client-hints))
 - Elastic Load Balancer
 - Load balancer target group: img-dn-ht
 - ECS service img-dn-ht runs tasks that register themselves in target group
