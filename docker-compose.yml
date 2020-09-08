@@ -1,7 +1,7 @@
-version: '2'
+version: '3'
 services:
   web:
     build: .
     image: 517252388151.dkr.ecr.us-east-1.amazonaws.com/img-dn-ht:latest
     ports:
-    - "0:8000"
+    - "${PORT-0}:8000"
