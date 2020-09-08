@@ -9,8 +9,7 @@ COPY package.json yarn.lock ./
 
 RUN yarn install --frozen-lockfile --no-cache --production
 
-# Bundle app source
-COPY . .
+COPY server.ts .
 
 CMD [ "yarn", "start" ]
 
