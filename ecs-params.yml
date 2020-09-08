@@ -2,6 +2,6 @@ version: 1
 task_definition:
   services:
     web:
-      cpu_shares: 1024
+      cpu_shares: 2048
       mem_limit: 1.0GB
-      mem_reservation: 0.1GB
+      mem_reservation: 64MB
