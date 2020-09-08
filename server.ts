@@ -33,7 +33,7 @@ app.get('/img/:sig/:w(\\d{0,})-:h(\\d{0,})/:url(*)', (req, res) => {
     ? Number.parseInt(widthHeader, 10)
     : undefined;
 
-  const dpr = Number.parseFloat(dprHeader) || 2.0;
+  const dpr = Number.parseFloat(dprHeader) || 1.0;
   const w = req.params.w ? dpr * Number.parseInt(req.params.w, 10) : undefined;
   const h = req.params.h ? dpr * Number.parseInt(req.params.h, 10) : undefined;
   
