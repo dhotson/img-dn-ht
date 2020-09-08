@@ -68,7 +68,7 @@ app.get('/img/:sig/:w(\\d{0,})-:h(\\d{0,})/:url(*)', (req, res) => {
           // console.log('info', info);
         });
 
-      if (req.accepts('webp')) {
+      if (req.get('Accept').indexOf("image/webp") !== -1) {
         res.set('Content-Type', 'image/webp');
         convert.webp({
           smartSubsample: true,
