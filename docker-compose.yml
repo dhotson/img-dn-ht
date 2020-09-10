@@ -5,3 +5,7 @@ services:
     image: 517252388151.dkr.ecr.us-east-1.amazonaws.com/img-dn-ht:latest
     ports:
     - "${PORT-0}:8000"
+    volumes:
+      - yarn_cache:/usr/local/share/.cache/yarn
+volumes:
+  yarn_cache:

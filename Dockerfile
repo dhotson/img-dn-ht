@@ -7,7 +7,7 @@ WORKDIR /usr/src/app
 
 COPY package.json yarn.lock ./
 
-RUN yarn install --frozen-lockfile --no-cache --production
+RUN yarn install --frozen-lockfile --production --verbose
 
 COPY server.ts .
 
