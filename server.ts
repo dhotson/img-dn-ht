@@ -28,11 +28,9 @@ app.get("/img/:sig/:w(\\d{0,})-:h(\\d{0,})/:url(*)", (req, res) => {
   if (!url.startsWith("https://dn.ht/")) {
     return res.sendStatus(400);
   }
-  const width = req.headers.width
-    ? Number.parseInt(widthHeader, 10)
-    : undefined;
+  const width = widthHeader ? Number.parseInt(widthHeader, 10) : undefined;
 
-  const dpr = Number.parseFloat(dprHeader) || 1.0;
+  const dpr = dprHeader ? Number.parseFloat(dprHeader) : 1.0;
   const w = req.params.w ? dpr * Number.parseInt(req.params.w, 10) : undefined;
   const h = req.params.h ? dpr * Number.parseInt(req.params.h, 10) : undefined;
 
@@ -74,7 +72,8 @@ app.get("/img/:sig/:w(\\d{0,})-:h(\\d{0,})/:url(*)", (req, res) => {
           // console.log("info", info);
         });
 
-      if (req.get("Accept").indexOf("image/webp") !== -1) {
+      const accept = req.get("Accept");
+      if (accept && accept.indexOf("image/webp") !== -1) {
         res.set("Content-Type", "image/webp");
         convert.webp({
           smartSubsample: true,
@@ -85,6 +84,7 @@ app.get("/img/:sig/:w(\\d{0,})-:h(\\d{0,})/:url(*)", (req, res) => {
 
       res.set("Cache-Control", "public, s-max-age=8640000");
       res.set("Vary", "Accept, DPR, Width");
+
       originResponse
         .pipe(convert)
         .pipe(res)
