@@ -1,6 +1,6 @@
-import * as express from "express";
-import * as sharp from "sharp";
-import * as request from "request";
+import express from "express";
+import sharp from "sharp";
+import request from "request";
 
 const app = express();
 
