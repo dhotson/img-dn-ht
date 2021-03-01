@@ -55,6 +55,7 @@ app.get("/img/:sig/:w(\\d{0,})-:h(\\d{0,})/:url(*)", (req, res) => {
       }
 
       const convert = sharp()
+        .rotate()
         .resize({
           width: width ? width : w,
           height: width ? undefined : h,
