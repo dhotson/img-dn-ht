@@ -2,7 +2,7 @@ version: '3'
 services:
   web:
     build: .
-    image: 517252388151.dkr.ecr.us-east-1.amazonaws.com/img-dn-ht:latest
+    image: "517252388151.dkr.ecr.ap-southeast-2.amazonaws.com/img-dn-ht:${TAG}"
     ports:
     - "${PORT-0}:8000"
     volumes:

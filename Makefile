@@ -1,6 +1,7 @@
 start-dev:
 	PORT=8000 docker-compose up
 
+deploy: export TAG = ${shell date +"%Y%m%d%H%M%S"}
 deploy:
 	COMPOSE_DOCKER_CLI_BUILD=1 DOCKER_BUILDKIT=1 docker-compose build
 	docker-compose push
