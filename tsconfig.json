@@ -1,3 +1,6 @@
 {
-  "extends": "@tsconfig/recommended"
+  "extends": "@tsconfig/recommended",
+  "compilerOptions": {
+    "types": ["node"]
+  }
 }

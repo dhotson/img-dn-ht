@@ -12,7 +12,7 @@ COPY \
 
 RUN yarn install --frozen-lockfile --production
 
-COPY server.ts ./
+COPY src ./src
 
 CMD [ "yarn", "start" ]
 
