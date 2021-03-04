@@ -5,7 +5,7 @@ import path from "path";
 import fs from "fs";
 import os from "os";
 
-const cacheDir = path.join(path.dirname(__filename), "image_cache");
+const cacheDir = path.join(path.dirname(__filename), "..", "image_cache");
 if (!fs.existsSync(cacheDir)) {
   fs.mkdirSync(cacheDir);
 }
