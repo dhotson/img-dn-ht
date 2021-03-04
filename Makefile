@@ -1,3 +1,4 @@
+start-dev: export TAG = ${shell date +"%Y%m%d%H%M%S"}
 start-dev:
 	PORT=8000 docker-compose up
 
