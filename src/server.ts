@@ -3,7 +3,7 @@ import sharp from "sharp";
 import request from "request";
 import path from "path";
 import fs from "fs";
-import { access, mkdtemp, writeFile, rename } from "fs/promises";
+import { stat, access, mkdtemp, writeFile, rename, fsync } from "fs/promises";
 import os from "os";
 
 const cacheDir = path.join(path.dirname(__filename), "..", "image_cache");
@@ -29,7 +29,7 @@ app.get("/img", (clientRequest, clientResponse) => {
   clientResponse.send(
     `
     <meta http-equiv="Accept-CH" content="DPR, Width">
-    <img width="500px" sizes="500px" src="/img/s/-/https://dn.ht/journal/photos/roll1/000031-8.jpg" />
+    <img style="background: red" width="290" sizes="580px" src="/img/s/580-/https://dn.ht/journal/photos/tas-2021/IMG_6956-23.jpg" />
     `
   );
 });
@@ -150,7 +150,7 @@ app.get(
             const resized = originResponse.pipe(convert);
             resized.on("error", (err) => {
               if (err) console.error("Error resizing", err);
-              clientResponse.sendStatus(500);
+              // clientResponse.sendStatus(500);
             });
 
             //Send to client
@@ -175,14 +175,20 @@ app.get(
             );
             const tempFile = fs.createWriteStream(tempPath);
 
-            await new Promise((resolve, reject) => {
-              resized
-                .pipe(tempFile) //
-                .on("finish", resolve)
-                .on("error", reject);
+            const s = resized.pipe(tempFile);
+            s.on("finish", async () => {
+              const x = await stat(tempPath);
+              if (x.size > 0) {
+                await rename(tempMetaPath, cacheMetaPath);
+                await rename(tempPath, cachePath);
+              } else {
+                console.error("Empty file??", tempPath, tempMetaPath);
+              }
             });
-            await rename(tempMetaPath, cacheMetaPath);
-            await rename(tempPath, cachePath);
+            s.on("error", (err) => {
+              console.error(err);
+              clientResponse.send(500);
+            });
           });
       }
     } catch (err) {
